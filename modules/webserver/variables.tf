@@ -20,11 +20,7 @@ variable "web_subnet_id" {
 
 variable "sg_ports" {
   description = "Security Group Ports"
-}
-
-variable "entry_script_path" {
-  description = "User Data Entry Script Path"
-  type        = string
+  type        = map(any)
 }
 
 variable "ssh_key_name" {

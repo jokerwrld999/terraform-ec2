@@ -1,3 +1,4 @@
 output "web_subnet_id" {
-  value = aws_subnet.web_subnet.id
+  description = "Web Subnet Id"
+  value       = aws_subnet.web_subnet.id
 }

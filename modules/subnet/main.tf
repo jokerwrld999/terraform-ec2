@@ -1,3 +1,14 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+
+  required_version = ">= 1.5.0"
+}
+
 # Creating a Subnet
 resource "aws_subnet" "web_subnet" {
   vpc_id            = var.vpc_id

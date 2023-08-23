@@ -1,13 +1,57 @@
 repos:
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.62.3
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
     hooks:
-      - id: terraform_fmt
-      - id: terraform_validate
-      - id: terraform_docs
+      # Git style
+      - name: Check Merge Conglicts
+        id: check-merge-conflict
+      - name: Check Large Files
+        id: check-added-large-files
+
+      # Common errors
+      - name: Fix End Of File
+        id: end-of-file-fixer
+      - name: Fix Trailing Spaces
+        id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: CHANGELOG.md
+      - name: Check YAML
+        id: check-yaml
+
+      # Cross platform
+      - name: Fix Mixed Line Endings
+        id: mixed-line-ending
+        args: [--fix=lf]
+      - name: Fix UTF-8
+        id: fix-byte-order-marker
+
+      # Security
+      - name: Detect AWS Creds
+        id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+      - name: Detect AWS Private Key
+        id: detect-private-key
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: shfmt
+        args: ['-l', '-i', '2', '-ci', '-sr', '-w']
+      - id: shellcheck
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.82.0
+    hooks:
+      - name: Terraform Formatting
+        id: terraform_fmt
+      - name: Terraform Validating
+        id: terraform_validate
+      - name: Terraform Docs
+        id: terraform_docs
         args:
           - '--args=--lockfile=false'
-      - id: terraform_tflint
+      - name: Terraform TFlint
+        id: terraform_tflint
         args:
           - '--args=--only=terraform_deprecated_interpolation'
           - '--args=--only=terraform_deprecated_index'
@@ -22,9 +66,3 @@ repos:
           - '--args=--only=terraform_required_providers'
           - '--args=--only=terraform_standard_module_structure'
           - '--args=--only=terraform_workspace_remote'
-      - id: checkov
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
-    hooks:
-      - id: check-merge-conflict
-      - id: end-of-file-fixer

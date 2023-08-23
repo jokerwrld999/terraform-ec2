@@ -28,17 +28,14 @@ variable "instance_type" {
   type        = string
 }
 
-variable "entry_script_path" {
-  description = "User Data Entry Script Path"
-  type        = string
-}
-
 variable "ssh_key_name" {
   description = "SSH Key Name"
   type        = string
 }
 
 variable "sg_ports" {
+  description = "Security Group Ports"
+  type        = map(any)
   default = {
     ports = [
       {
