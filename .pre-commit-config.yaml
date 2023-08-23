@@ -1,4 +1,9 @@
 repos:
+  - repo: meta
+    hooks:
+      - name: Check For Useless Excludes
+        id: check-useless-excludes
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -14,9 +19,9 @@ repos:
       - name: Fix Trailing Spaces
         id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-        exclude: CHANGELOG.md
       - name: Check YAML
         id: check-yaml
+        args: [--unsafe]
 
       # Cross platform
       - name: Fix Mixed Line Endings
